@@ -2,7 +2,12 @@ require( './setup.js' );
 var RiakPBC = require( '../' );
 var Exec = require( 'child_process' ).exec;
 
-describe( 'Security', function() {
+/*
+	These tests will not run correctly until we implement a way to toggle security
+	at the server level.
+*/
+
+describe.skip( 'Security', function() {
 
 	describe( '(disabled)', function() {
 
