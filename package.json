@@ -1,5 +1,5 @@
 {
-  "name": "riakpbc",
+  "name": "@lklabs/riakpbc",
   "version": "2.1.0",
   "description": "RiakPBC is a low-level Riak protocol buffer client.",
   "main": "index.js",
@@ -10,16 +10,17 @@
     "riakproto": "2.x.x"
   },
   "devDependencies": {
-    "lab": "4.x.x",
-    "precommit-hook": "1.x.x",
+    "biggulp": "0.0.5",
+    "chai": "^3.0.0",
+    "gulp": "^3.9.0",
     "jshint": "2.4.x"
   },
   "scripts": {
-    "test": "make test-cov"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com:nlf/riakpbc.git"
+    "url": "git://github.com:LeanKit-Labs/riakpbc.git"
   },
   "keywords": [
     "riak",
@@ -29,6 +30,19 @@
   "author": "Nathan LaFreniere <quitlahok@gmail.com> (https://github.com/nlf)",
   "license": "MIT",
   "engines": {
-    "node": ">= 0.10.0 < 0.12"
-  }
+    "node": ">= 0.10.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "contributors": [
+    {
+      "name": "Brian Edgerton",
+      "email": "brian.edgerton@leankit.com"
+    },
+    {
+      "name": "Ian Evatt",
+      "email": "ian.evatt@leankit.com"
+    }
+  ]
 }
