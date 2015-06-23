@@ -1,0 +1,7 @@
+/.vagrant
+/Vagrantfile
+/Vagrantfile.sample
+/.idea
+/coverage
+/test
+/doc
