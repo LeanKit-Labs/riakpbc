@@ -1,4 +1,18 @@
-# RiakPBC [![build status](http://img.shields.io/travis/nlf/riakpbc/master.svg?style=flat-square)](http://travis-ci.org/nlf/riakpbc)[![Code Climate](http://img.shields.io/codeclimate/github/nlf/riakpbc.svg?style=flat-square)](https://codeclimate.com/github/nlf/riakpbc)[![Gitter](http://img.shields.io/badge/gitter-join%20chat-green.svg?style=flat-square)](https://gitter.im/nlf/riakpbc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# RiakPBC
+
+**This is a fork of [https://github.com/nlf/riakpbc](https://github.com/nlf/riakpbc). The underlying dependencies have been updated to make it compatible with the Riak 2.1 protocol buffer specifications.**
+
+## Tests
+
+Initialize Vagrant box:
+
+```bash
+$ cp Vagrantfile.sample Vagrantfile // If the Vagrantfile does not yet exist
+$ vagrant up
+$ gulp test
+```
+
+*Note: The search tests do all pass, inconsistently. More work needs to be done to stabilize these. Also, the security tests are skipped for now until some more infrastructure work can be done.*
 
 RiakPBC is a low-level [riak 2.0](http://basho.com/riak) [protocol buffer](https://developers.google.com/protocol-buffers/docs/overview) client for [node.js](http://nodejs.org/).
 
