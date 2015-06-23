@@ -7,7 +7,7 @@
     "generic-pool": "2.x.x",
     "joi": "4.x.x",
     "protobuf.js": "1.x.x",
-    "riakproto": "2.x.x"
+    "@lklabs/riakproto": "2.x.x"
   },
   "devDependencies": {
     "biggulp": "0.0.5",
