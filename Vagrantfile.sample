@@ -1,0 +1,50 @@
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "phusion/ubuntu-14.04-amd64"
+  config.vm.box_url = "https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vmwarefusion.box"
+  config.vm.hostname = "riakpbc.leankit.com"
+
+  config.vm.provider "vmware_fusion" do |v|
+    v.vmx["memsize"] = "2048"
+    v.vmx["numvcpus"] = "2"
+  end
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing "localhost:8080" will access port 80 on the guest machine.
+  config.vm.network "forwarded_port", guest: 8098, host: 8098
+  config.vm.network "forwarded_port", guest: 8087, host: 8087
+
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  config.vm.network "private_network", ip: "192.168.33.10"
+
+  config.vm.provision "shell", inline: <<-SHELL
+
+    apt-get install -y curl software-properties-common libpam0g-dev
+    add-apt-repository -y ppa:webupd8team/java
+    apt-get update
+    echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+    apt-get install -y oracle-java7-installer
+
+    echo "riak soft nofile 4096\nriak hard nofile 65536" >> /etc/security/limits.conf
+
+    curl -s https://packagecloud.io/install/repositories/basho/riak/script.deb.sh | sudo bash
+    apt-get install riak=2.1.1-1
+
+    service riak stop
+
+    cp /vagrant/.riak/2.1/riak.conf /etc/riak/riak.conf
+
+    service riak start
+
+    riak-admin bucket-type create _test_crdt_counter '{"props":{"datatype":"counter","allow_mult":true}}' > /dev/null || true
+    riak-admin bucket-type create _test_crdt_map '{"props":{"datatype":"map","allow_mult":true}}' > /dev/null || true
+    riak-admin bucket-type create _test_crdt_set '{"props":{"datatype":"set","allow_mult":true}}' > /dev/null || true
+    riak-admin bucket-type activate _test_crdt_counter > /dev/null || true
+    riak-admin bucket-type activate _test_crdt_map > /dev/null || true
+    riak-admin bucket-type activate _test_crdt_set > /dev/null || true
+  SHELL
+
+
+end
